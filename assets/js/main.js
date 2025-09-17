@@ -1,5 +1,16 @@
+
 // WEB ATELIER (UDIT) - Student Project Template JavaScript
-// Add your interactive functionality here
+// Main functions:
+//   - Smooth scrolling for anchor links
+//   - Accessibility: skip link focus
+//   - Utility: update page metadata
+//
+// Possible improvements/extensions:
+//   - Add theme switcher (dark/light mode)
+//   - Add interactive navigation menu
+//   - Fetch and display dynamic content (e.g., GitHub commits)
+//   - Add form validation for contact forms
+//   - Add animations or transitions for UI elements
 
 document.addEventListener('DOMContentLoaded', function () {
 	// Initialize your project functionality
@@ -50,3 +61,6 @@ function updatePageMetadata(title, description) {
 		document.head.appendChild(metaDescription);
 	}
 }
+
+// Extension idea: Add a function to fetch and display latest GitHub commits
+// Extension idea: Add a function to toggle dark/light mode
