@@ -13,28 +13,66 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // // ---------- SCROLL ENTRE SECCIONES ----------
+  // const content = section.querySelector(".section-content");
+  // if (!content) return; // <-- guard
+
+  // content.addEventListener("scroll", () => {
+  //   const nextSection = sections[index + 1];
+  //   const prevSection = sections[index - 1];
+
+  //   // Scroll hacia abajo → activar siguiente sección
+  //   if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
+  //     if (nextSection) {
+  //       nextSection.classList.add("active");
+  //       nextSection.style.zIndex = parseInt(section.style.zIndex) + 1 || 11;
+  //     }
+  //   }
+
+  //   // Scroll hacia arriba → permitir ver sección anterior
+  //   if (content.scrollTop === 0) {
+  //     if (prevSection) {
+  //       prevSection.style.zIndex = parseInt(section.style.zIndex) - 1 || 9;
+  //     }
+  //   }
+  // });
+
   // ---------- SCROLL ENTRE SECCIONES ----------
-  const content = section.querySelector(".section-content");
-  if (!content) return; // <-- guard
+  const sections = document.querySelectorAll(".stack-section");
 
-  content.addEventListener("scroll", () => {
-    const nextSection = sections[index + 1];
-    const prevSection = sections[index - 1];
+  // Activamos la primera sección
+  if (sections.length > 0) {
+    sections[0].classList.add("active");
+    sections[0].style.zIndex = 10;
+  }
 
-    // Scroll hacia abajo → activar siguiente sección
-    if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
-      if (nextSection) {
-        nextSection.classList.add("active");
-        nextSection.style.zIndex = parseInt(section.style.zIndex) + 1 || 11;
+  sections.forEach((section, index) => {
+    const content = section.querySelector(".section-content");
+    if (!content) return; // proteccion si no existe
+
+    content.addEventListener("scroll", () => {
+      const nextSection = sections[index + 1];
+      const prevSection = sections[index - 1];
+
+      // Scroll hacia abajo → activar siguiente sección al terminar contenido
+      const scrollPercent =
+        content.scrollTop / (content.scrollHeight - content.clientHeight);
+      if (scrollPercent >= 0.97) {
+        // 97% del contenido
+        if (nextSection && !nextSection.classList.contains("active")) {
+          nextSection.classList.add("active");
+          nextSection.style.zIndex = parseInt(section.style.zIndex) + 1 || 11;
+        }
       }
-    }
 
-    // Scroll hacia arriba → permitir ver sección anterior
-    if (content.scrollTop === 0) {
-      if (prevSection) {
-        prevSection.style.zIndex = parseInt(section.style.zIndex) - 1 || 9;
+      // Scroll hacia arriba → permitir ver sección anterior
+      if (content.scrollTop <= 2) {
+        // cerca del inicio
+        if (prevSection) {
+          prevSection.style.zIndex = parseInt(section.style.zIndex) - 1 || 9;
+        }
       }
-    }
+    });
   });
 });
 

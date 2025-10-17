@@ -208,6 +208,7 @@ p {
   font-size: 21px;
   line-height: 1.6;
   text-align: left;
+  margin-bottom: 14px;
 }
 
 p strong {
@@ -434,6 +435,8 @@ footer {
   text-align: center;
   font-size: 0.875rem;
   height: 48px;
+  display: flex;
+  align-items: center;
   padding-left: 100px;
   padding-top: 6px;
 }
@@ -470,12 +473,12 @@ footer {
 
   .menu {
     position: fixed;
-    top: 80px;
+    top: 60px;
     right: -100%;
     width: 100%;
     height: 100vh;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     justify-content: flex-start;
     gap: 24px;
     background-color: white;
@@ -496,6 +499,7 @@ footer {
   p,
   p strong {
     font-size: 18px;
+    margin-bottom: 10px;
   }
 
   .Site-introduction h2 {
@@ -558,6 +562,19 @@ footer {
 
 /* MOBILE */
 @media screen and (max-width: 440px) {
+  .navbar {
+    padding: 1rem;
+    height: 60px;
+  }
+
+  .burger {
+    right: -42%;
+  }
+
+  .menu {
+    padding: 32px;
+    top: 50px;
+  }
   .hero h2 {
     font-size: 48px;
   }
@@ -571,6 +588,7 @@ footer {
   p strong {
     font-size: 16px;
   }
+
   .Site-introduction h2 {
     font-size: 48px;
     margin: 1.5rem 0 1.5rem 0;
@@ -621,6 +639,10 @@ footer {
     min-height: 360px;
   }
 
+  .gallery_screenshots .card .cont-img {
+    margin-bottom: 8px;
+  }
+
   .gallery_screenshots .card:first-child,
   .gallery_screenshots .card:nth-child(2) {
     grid-column: span 10;
@@ -628,5 +650,12 @@ footer {
 
   .conclusion {
     margin: 0 16px 48px 16px;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 12px;
+    height: 48px;
+    padding-left: 16px;
   }
 }
