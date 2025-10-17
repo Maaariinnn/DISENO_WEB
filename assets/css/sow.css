@@ -24,16 +24,6 @@
 
 /* NAVBAR ---------------------------- */
 .navbar {
-  /* position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: white;
-  padding: 0 100px;
-  height: 80px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  z-index: 1000; */
   position: fixed;
   top: 0;
   width: 100%;
@@ -47,27 +37,6 @@
 }
 
 .menu {
-  /* display: flex;
-  justify-content: center;
-  gap: 4rem;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-  list-style: none; */
-
-  /* position: fixed; 
-  top: 0;
-  left: 0;
-  width: 100%;
-  gap: 32px;
-  height: 100px;
-  background-color: white; 
-  display: flex;
-  align-items: center;
-  justify-content: center; 
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 0 20px; */
   display: flex;
   justify-content: center;
   gap: 4rem;
@@ -108,18 +77,6 @@
 }
 
 .burger {
-  /* display: none;
-  font-size: 1.2rem;
-  color: white;
-  cursor: pointer;
-  width: 0%; */
-
-  /* position: absolute;
-  right: 20px;
-  font-size: 26px;
-  cursor: pointer;
-  display: none; */
-
   display: none;
   position: absolute;
   right: 30px;
@@ -127,18 +84,12 @@
   cursor: pointer;
 }
 
-/* Menú visible cuando se activa */
-/* #navbar.open > ul {
-  right: 0;
-} */
-
 /* HEADER  ----------------------------*/
 #header {
   width: 100%;
   height: 100vh;
   background-image: url("https://ik.imagekit.io/lnj040m143/Imgs%20Analisis%20Web/wallpaper1.png");
   background-size: cover;
-  /* overflow: hidden; */
   z-index: -1;
 }
 
@@ -164,8 +115,6 @@ h1 {
   font-size: 120px;
   margin: 4rem 0 1.5rem 0;
   text-align: center;
-  /* position: absolute; */
-  /* top: 50%; */
 }
 
 /* HERO  ----------------------------*/
@@ -184,7 +133,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding: 2rem; */
   position: relative;
 }
 
@@ -224,10 +172,7 @@ p strong {
 .stacked-container {
   height: 100vh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory; /* ✅ scroll sección por sección */
-  /* position: relative; */
-  /* width: 100%; */
-  /* margin-top: 100vh; */
+  scroll-snap-type: y mandatory;
 }
 
 #Flying_Papers {
@@ -267,12 +212,12 @@ p strong {
   background-color: wheat;
   overflow-y: auto;
   scroll-behavior: smooth;
-  scroll-snap-align: start; /* ✅ cada sección se alinea al inicio del contenedor */
+  scroll-snap-align: start;
 }
 
 .section-content {
-  max-height: 100vh; /* no excede la altura de la ventana */
-  overflow-y: auto; /* scroll dentro del div */
+  max-height: 100vh;
+  overflow-y: auto;
   width: 100vw;
 }
 
@@ -392,7 +337,6 @@ p strong {
   border-radius: 12px;
   position: relative;
   margin-bottom: 16px;
-  /* padding: clamp(20px, 4vw, 80px); */
   background: var(--bg-box-figure, #222);
 }
 
@@ -415,7 +359,7 @@ p strong {
   width: -webkit-fill-available;
   height: 100%;
   vertical-align: middle;
-  object-fit: cover; /* Ajustar la imagen manteniendo su relación de aspecto, cubriendo el área del contenedor */
+  object-fit: cover;
   transition: 0.5s;
 }
 
@@ -441,7 +385,7 @@ footer {
   padding-top: 6px;
 }
 
-/* Desktop: Layout horizontal completo - 834px+ */
+/* MEDIA QUERIES - TABLET -------------------------------- */
 @media screen and (max-width: 840px) {
   .navbar {
     padding: 2rem 100px;
@@ -450,11 +394,10 @@ footer {
   .burger {
     display: block;
     position: absolute;
-    right: -60%; /* was right: -340px; -> makes it visible */
+    right: -60%;
     top: 0px;
   }
 
-  /* target the menu element when it has the menu-show class */
   .menu.menu-show {
     right: 0;
   }
@@ -558,9 +501,16 @@ footer {
   .conclusion {
     margin: 0 48px 60px 48px;
   }
+
+  footer {
+    text-align: center;
+    font-size: 18px;
+    height: 48px;
+    padding-left: 48px;
+  }
 }
 
-/* MOBILE */
+/* MEDIA QUERIES - MOBILE -------------------------------- */
 @media screen and (max-width: 440px) {
   .navbar {
     padding: 1rem;

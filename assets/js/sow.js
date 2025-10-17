@@ -13,68 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // // ---------- SCROLL ENTRE SECCIONES ----------
-  // const content = section.querySelector(".section-content");
-  // if (!content) return; // <-- guard
-
-  // content.addEventListener("scroll", () => {
-  //   const nextSection = sections[index + 1];
-  //   const prevSection = sections[index - 1];
-
-  //   // Scroll hacia abajo → activar siguiente sección
-  //   if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
-  //     if (nextSection) {
-  //       nextSection.classList.add("active");
-  //       nextSection.style.zIndex = parseInt(section.style.zIndex) + 1 || 11;
-  //     }
-  //   }
-
-  //   // Scroll hacia arriba → permitir ver sección anterior
-  //   if (content.scrollTop === 0) {
-  //     if (prevSection) {
-  //       prevSection.style.zIndex = parseInt(section.style.zIndex) - 1 || 9;
-  //     }
-  //   }
-  // });
-
-  // // ---------- SCROLL ENTRE SECCIONES ----------
-  // const sections = document.querySelectorAll(".stack-section");
-
-  // // Activamos la primera sección
-  // if (sections.length > 0) {
-  //   sections[0].classList.add("active");
-  //   sections[0].style.zIndex = 10;
-  // }
-
-  // sections.forEach((section, index) => {
-  //   const content = section.querySelector(".section-content");
-  //   if (!content) return; // proteccion si no existe
-
-  //   content.addEventListener("scroll", () => {
-  //     const nextSection = sections[index + 1];
-  //     const prevSection = sections[index - 1];
-
-  //     // Scroll hacia abajo → activar siguiente sección al terminar contenido
-  //     const scrollPercent =
-  //       content.scrollTop / (content.scrollHeight - content.clientHeight);
-  //     if (scrollPercent >= 0.97) {
-  //       // 97% del contenido
-  //       if (nextSection && !nextSection.classList.contains("active")) {
-  //         nextSection.classList.add("active");
-  //         nextSection.style.zIndex = parseInt(section.style.zIndex) + 1 || 11;
-  //       }
-  //     }
-
-  //     // Scroll hacia arriba → permitir ver sección anterior
-  //     if (content.scrollTop <= 2) {
-  //       // cerca del inicio
-  //       if (prevSection) {
-  //         prevSection.style.zIndex = parseInt(section.style.zIndex) - 1 || 9;
-  //       }
-  //     }
-  //   });
-  // });
-
   // ---------- SECCIONES ----------
   const sections = document.querySelectorAll(".stack-section");
 
@@ -118,8 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const menu = document.querySelector(".menu");
   const icon = burger ? burger.querySelector("i") : null;
 
-  if (!burger || !menu) return; // safe exit if markup differs
-
+  if (!burger || !menu) return;
   burger.addEventListener("click", () => {
     menu.classList.toggle("menu-show");
     if (icon) {
@@ -141,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ---------- AOS: initialize once and refresh on inner scroll ----------
   AOS.init({
     duration: 1000,
-    once: true, // change to false if you want repeat animations
+    once: true,
   });
 
   // refresh AOS when scrolling inside custom scroll containers so AOS re-evaluates positions
@@ -152,11 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
       clearTimeout(aosRefreshTimer);
       aosRefreshTimer = setTimeout(() => {
         AOS.refresh();
-      }, 120); // throttle refresh to avoid heavy calls
+      }, 120);
     });
   });
 
-  // ---------- IntersectionObserver fallback for elements inside scrollable containers ----------
+  // Enable AOS animations within scrollable containers
   (function enableAOSInScrollContainers() {
     const isScrollable = (el) => {
       if (!el || el === document.body) return false;
@@ -182,8 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const observers = new WeakMap();
 
     aosElements.forEach((el) => {
-      const root = getScrollParent(el) || document; // null => use document (window)
-      // If root === document, leave AOS to handle window scrolling
+      const root = getScrollParent(el) || document;
       if (root === document) return;
 
       if (!observers.has(root)) {
