@@ -1,3 +1,19 @@
+// Corrige rutas si estás en GitHub Pages
+if (window.location.hostname.includes("github.io")) {
+  const links = document.querySelectorAll(
+    'link[rel="stylesheet"], script[src]'
+  );
+  links.forEach((el) => {
+    const attr = el.tagName === "LINK" ? "href" : "src";
+    if (el.getAttribute(attr).startsWith("../")) {
+      el.setAttribute(
+        attr,
+        "/DISENO_WEB/" + el.getAttribute(attr).replace("../", "")
+      );
+    }
+  });
+}
+
 const sections = document.querySelectorAll(".stack-section");
 
 // Activamos la primera sección
