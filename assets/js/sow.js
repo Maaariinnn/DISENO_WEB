@@ -37,7 +37,45 @@ document.addEventListener("DOMContentLoaded", function () {
   //   }
   // });
 
-  // ---------- SCROLL ENTRE SECCIONES ----------
+  // // ---------- SCROLL ENTRE SECCIONES ----------
+  // const sections = document.querySelectorAll(".stack-section");
+
+  // // Activamos la primera sección
+  // if (sections.length > 0) {
+  //   sections[0].classList.add("active");
+  //   sections[0].style.zIndex = 10;
+  // }
+
+  // sections.forEach((section, index) => {
+  //   const content = section.querySelector(".section-content");
+  //   if (!content) return; // proteccion si no existe
+
+  //   content.addEventListener("scroll", () => {
+  //     const nextSection = sections[index + 1];
+  //     const prevSection = sections[index - 1];
+
+  //     // Scroll hacia abajo → activar siguiente sección al terminar contenido
+  //     const scrollPercent =
+  //       content.scrollTop / (content.scrollHeight - content.clientHeight);
+  //     if (scrollPercent >= 0.97) {
+  //       // 97% del contenido
+  //       if (nextSection && !nextSection.classList.contains("active")) {
+  //         nextSection.classList.add("active");
+  //         nextSection.style.zIndex = parseInt(section.style.zIndex) + 1 || 11;
+  //       }
+  //     }
+
+  //     // Scroll hacia arriba → permitir ver sección anterior
+  //     if (content.scrollTop <= 2) {
+  //       // cerca del inicio
+  //       if (prevSection) {
+  //         prevSection.style.zIndex = parseInt(section.style.zIndex) - 1 || 9;
+  //       }
+  //     }
+  //   });
+  // });
+
+  // ---------- SECCIONES ----------
   const sections = document.querySelectorAll(".stack-section");
 
   // Activamos la primera sección
@@ -46,33 +84,30 @@ document.addEventListener("DOMContentLoaded", function () {
     sections[0].style.zIndex = 10;
   }
 
+  // ---------- SCROLL ENTRE SECCIONES CON INTERSECTIONOBSERVER ----------
   sections.forEach((section, index) => {
-    const content = section.querySelector(".section-content");
-    if (!content) return; // proteccion si no existe
+    const nextSection = sections[index + 1];
 
-    content.addEventListener("scroll", () => {
-      const nextSection = sections[index + 1];
-      const prevSection = sections[index - 1];
-
-      // Scroll hacia abajo → activar siguiente sección al terminar contenido
-      const scrollPercent =
-        content.scrollTop / (content.scrollHeight - content.clientHeight);
-      if (scrollPercent >= 0.97) {
-        // 97% del contenido
-        if (nextSection && !nextSection.classList.contains("active")) {
-          nextSection.classList.add("active");
-          nextSection.style.zIndex = parseInt(section.style.zIndex) + 1 || 11;
-        }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (
+            entry.isIntersecting &&
+            nextSection &&
+            !nextSection.classList.contains("active")
+          ) {
+            nextSection.classList.add("active");
+            nextSection.style.zIndex = parseInt(section.style.zIndex || 10) + 1;
+          }
+        });
+      },
+      {
+        root: null, // observa el scroll de la ventana
+        threshold: 0.98, // cuando el 98% de la sección actual es visible
       }
+    );
 
-      // Scroll hacia arriba → permitir ver sección anterior
-      if (content.scrollTop <= 2) {
-        // cerca del inicio
-        if (prevSection) {
-          prevSection.style.zIndex = parseInt(section.style.zIndex) - 1 || 9;
-        }
-      }
-    });
+    observer.observe(section);
   });
 });
 
