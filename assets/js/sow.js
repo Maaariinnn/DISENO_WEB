@@ -1,27 +1,19 @@
-const sections = document.querySelectorAll(".stack-section");
+document.addEventListener("DOMContentLoaded", function () {
+  // ---------- CORRECCIÓN DE RUTAS EN GITHUB PAGES ----------
+  if (window.location.hostname.includes("github.io")) {
+    const links = document.querySelectorAll(
+      'link[rel="stylesheet"], script[src], img[src]'
+    );
+    links.forEach((el) => {
+      const attr = el.tagName === "LINK" ? "href" : "src";
+      const value = el.getAttribute(attr);
+      if (value && value.startsWith("../")) {
+        el.setAttribute(attr, value.replace("../", "/DISENO_WEB/"));
+      }
+    });
+  }
 
-// Activamos la primera sección
-sections[0].classList.add("active");
-sections[0].style.zIndex = 10;
-
-// Función para el menú de navegación
-function goToSection(index) {
-  const section = sections[index];
-  const content = section.querySelector(".section-content");
-
-  // Activar la sección y superponer
-  section.classList.add("active");
-  section.style.zIndex = 10 + index;
-
-  // Reset scroll interno (si existe)
-  if (content) content.scrollTop = 0;
-
-  // Scroll de la ventana hasta la sección
-  section.scrollIntoView({ behavior: "smooth" });
-}
-
-// Manejo de scroll interno y superposición
-sections.forEach((section, index) => {
+  // ---------- SCROLL ENTRE SECCIONES ----------
   const content = section.querySelector(".section-content");
   if (!content) return; // <-- guard
 
